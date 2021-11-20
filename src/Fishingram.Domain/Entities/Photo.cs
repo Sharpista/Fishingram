@@ -1,6 +1,8 @@
-﻿namespace Fishingram.Domain.Entities
+﻿using Fishingram.Shared.Entities;
+
+namespace Fishingram.Domain.Entities
 {
-    public class Photo
+    public class Photo : File
     {
     }
 }

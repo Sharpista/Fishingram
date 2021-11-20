@@ -16,10 +16,8 @@ namespace Fishingram.UnitTests.Domain.Entities
         [TestMethod]
         public void ShouldReturnErrorWhenNameIsNull()
         {
-            _profile = new Profile();
             _user = new User(null, DateTime.Now, 1, _profile);
 
-            Assert.IsTrue(_user.va)
         }
     }    
 }
