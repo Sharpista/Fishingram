@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fishingram.Shared\Fishingram.Shared.csproj" />
+    <ProjectReference Include="..\Fishingram.Domain\Fishingram.Domain.csproj" />
   </ItemGroup>
 
 </Project>

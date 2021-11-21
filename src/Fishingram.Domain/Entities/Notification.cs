@@ -9,4 +9,4 @@ namespace Fishingram.Domain.Entities
         public virtual long SenderId { get; private set; }
         public virtual Profile Recepient { get; private set; }
     }
-}
+} 
