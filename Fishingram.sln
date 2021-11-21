@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fishingram.UnitTests.Domain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fishingram.Service", "src\Fishingram.Service\Fishingram.Service.csproj", "{54EE70D3-22EA-4146-B033-8D20D9DCE22F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fishingram.DataAccess", "src\Fishingram.DataAccess\Fishingram.DataAccess.csproj", "{66408DAC-D9F6-49E8-A308-F408503C8EF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{54EE70D3-22EA-4146-B033-8D20D9DCE22F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54EE70D3-22EA-4146-B033-8D20D9DCE22F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54EE70D3-22EA-4146-B033-8D20D9DCE22F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66408DAC-D9F6-49E8-A308-F408503C8EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66408DAC-D9F6-49E8-A308-F408503C8EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66408DAC-D9F6-49E8-A308-F408503C8EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66408DAC-D9F6-49E8-A308-F408503C8EF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{6DAC78C8-7171-4A51-8D57-C049A16B2E90} = {3FC351B3-2F70-4AA5-A43E-7235DB545326}
 		{558F3986-80DB-4C62-B38C-E73D86CCEFF6} = {A50A7ED9-F5AA-4F1B-B284-27ACE2EF7AA8}
 		{54EE70D3-22EA-4146-B033-8D20D9DCE22F} = {3FC351B3-2F70-4AA5-A43E-7235DB545326}
+		{66408DAC-D9F6-49E8-A308-F408503C8EF1} = {B4559458-CFEE-4E0B-8183-DA9410400197}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3346BE9A-14E9-4003-8308-D5861E4F0BAE}
