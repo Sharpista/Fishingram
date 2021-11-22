@@ -20,5 +20,10 @@ namespace Fishingram.Domain.Entities
             CreationDate = DateTime.Now;
             Photos = new List<Photo>();
         }
+
+        public PhotoAlbum()
+        {
+
+        }
     }
 }

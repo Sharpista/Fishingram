@@ -1,7 +1,7 @@
 ﻿using Fishingram.Domain.Interfaces.Repositories;
 using Fishingram.Domain.Interfaces.Services;
 using Fishingram.Shared.Entities;
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Fishingram.Service.Entities.Services
@@ -15,7 +15,7 @@ namespace Fishingram.Service.Entities.Services
             _repository = repository;
         }
 
-        public virtual async Task<TEntity> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAll()
         {
             return await _repository.GetAll();
         }

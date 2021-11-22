@@ -16,6 +16,9 @@ namespace Fishingram.Domain.Entities
         public virtual IList<Profile> Followers { get; private set; }
         public virtual IList<Post> Posts { get; private set; }
         public virtual IList<Notification> Notifications { get; private set; }
+        public virtual IList<PhotoAlbum> PhotoAlbums { get; private set; }
+
+
 
         public Profile(string email, string password, FullAddress fullAdress, Photo profilePicture, User user, long profilePictureId, long userId)
         {
@@ -29,6 +32,12 @@ namespace Fishingram.Domain.Entities
             Followers = new List<Profile>();
             Posts = new List<Post>();
             Notifications = new List<Notification>();
+            PhotoAlbums = new List<PhotoAlbum>();
+        }
+
+        public Profile()
+        {
+                
         }
     }
 }

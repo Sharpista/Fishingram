@@ -1,5 +1,4 @@
-﻿using Fishingram.Domain.Enumerables;
-using Fishingram.Shared.Entities;
+﻿using Fishingram.Shared.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -27,6 +26,10 @@ namespace Fishingram.Domain.Entities
             Photo = photo;
             PhotoId = photoId;
             Notifications = new List<Notification>();
+        }
+        public Post()
+        {
+
         }
     }
 }

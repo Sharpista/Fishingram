@@ -1,5 +1,6 @@
 ﻿using Fishingram.Shared.Entities;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Fishingram.Domain.Interfaces.Services
@@ -8,7 +9,7 @@ namespace Fishingram.Domain.Interfaces.Services
     {
         Task Add(T entity);
         Task<T> GetById(long id);
-        Task<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
         Task Put(T entity);
         Task Delete(long id);
     }

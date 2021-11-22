@@ -21,5 +21,9 @@ namespace Fishingram.Domain.Entities
             ProfileId = profileId;
             Profile = profile;
         }
+        public User()
+        {
+
+        }
     }
 }
