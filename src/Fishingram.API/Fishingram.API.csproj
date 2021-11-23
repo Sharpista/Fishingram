@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Fishingram.DataAccess\Fishingram.DataAccess.csproj" />
     <ProjectReference Include="..\Fishingram.Domain\Fishingram.Domain.csproj" />
   </ItemGroup>
 
