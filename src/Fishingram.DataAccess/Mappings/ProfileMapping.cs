@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Fishingram.DataAccess.Mappings
 {
-    public class ProfileMapping : IEntityTypeConfiguration<Profile>
+    public class ProfileMapping : IEntityTypeConfiguration<UserProfile>
     {
-        public void Configure(EntityTypeBuilder<Profile> profile)
+        public void Configure(EntityTypeBuilder<UserProfile> profile)
         {
             profile.HasKey(_ => _.Id);
             profile.HasIndex(_ => _.Email).IsUnique();

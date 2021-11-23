@@ -2,7 +2,7 @@
 
 namespace Fishingram.Domain.Interfaces.Services
 {
-    public interface IProfileService : IServiceBase<Profile>
+    public interface IProfileService : IServiceBase<UserProfile>
     {
     }
 }

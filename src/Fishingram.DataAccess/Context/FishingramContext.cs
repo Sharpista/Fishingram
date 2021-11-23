@@ -11,7 +11,7 @@ namespace Fishingram.DataAccess.Context
     public class FishingramContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<UserProfile> Profiles { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<PhotoAlbum> PhotoAlbums { get; set; }

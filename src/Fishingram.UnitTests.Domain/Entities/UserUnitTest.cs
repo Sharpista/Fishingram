@@ -8,7 +8,7 @@ namespace Fishingram.UnitTests.Domain.Entities
     public class UserUnitTest
     {
         private User _user;
-        private Profile _profile;
+        private UserProfile _profile;
         [TestMethod]
         public void ShouldReturnErrorWhenNameIsNull()
         {

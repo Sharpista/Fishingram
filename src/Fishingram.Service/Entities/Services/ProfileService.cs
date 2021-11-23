@@ -4,7 +4,7 @@ using Fishingram.Domain.Interfaces.Services;
 
 namespace Fishingram.Service.Entities.Services
 {
-    public class ProfileService : ServiceBase<Profile>, IProfileService
+    public class ProfileService : ServiceBase<UserProfile>, IProfileService
     {
         private readonly IProfileRepository _repository;
         public ProfileService(IProfileRepository repository) : base(repository)

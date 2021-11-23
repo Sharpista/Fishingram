@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Fishingram.Domain.Entities
 {
-    public class Profile : EntityBase
+    public class UserProfile : EntityBase
     {
         public virtual string Email { get; private set; }
         public virtual string Password { get; private set; }
@@ -13,14 +13,14 @@ namespace Fishingram.Domain.Entities
         public virtual long ProfilePictureId { get; private set; }
         public virtual User User { get; private set; }
         public virtual long UserId { get; private set; }
-        public virtual IList<Profile> Followers { get; private set; }
+        public virtual IList<UserProfile> Followers { get; private set; }
         public virtual IList<Post> Posts { get; private set; }
         public virtual IList<Notification> Notifications { get; private set; }
         public virtual IList<PhotoAlbum> PhotoAlbums { get; private set; }
 
 
 
-        public Profile(string email, string password, FullAddress fullAdress, Photo profilePicture, User user, long profilePictureId, long userId)
+        public UserProfile(string email, string password, FullAddress fullAdress, Photo profilePicture, User user, long profilePictureId, long userId)
         {
             Email = email;
             Password = password;
@@ -29,13 +29,13 @@ namespace Fishingram.Domain.Entities
             User = user;
             ProfilePictureId = profilePictureId;
             UserId = userId;
-            Followers = new List<Profile>();
+            Followers = new List<UserProfile>();
             Posts = new List<Post>();
             Notifications = new List<Notification>();
             PhotoAlbums = new List<PhotoAlbum>();
         }
 
-        public Profile()
+        public UserProfile()
         {
                 
         }

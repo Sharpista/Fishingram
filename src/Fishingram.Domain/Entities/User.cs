@@ -12,9 +12,9 @@ namespace Fishingram.Domain.Entities
         public virtual string Name { get; private set; }
         public virtual DateTime BirthDate { get; private set; }
         public virtual long ProfileId { get; private set; }
-        public virtual Profile Profile { get; private set; }
+        public virtual UserProfile Profile { get; private set; }
 
-        public User(string name, DateTime birthDate, long profileId, Profile profile)
+        public User(string name, DateTime birthDate, long profileId, UserProfile profile)
         {
             Name = name;
             BirthDate = birthDate;
