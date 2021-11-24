@@ -12,7 +12,6 @@ namespace Fishingram.API.Configuration
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<UserProfile, ProfileDTO>().ReverseMap();
             CreateMap<Post, PostDTO>().ReverseMap();
             CreateMap<PhotoAlbum, PhotoAlbumDTO>().ReverseMap();

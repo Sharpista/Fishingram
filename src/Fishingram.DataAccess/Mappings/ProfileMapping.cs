@@ -19,20 +19,19 @@ namespace Fishingram.DataAccess.Mappings
             profile.Property(_ => _.Email)
                 .HasMaxLength(50)
                 .IsRequired();
-               
+            profile.OwnsOne(_ => _.Address);
+            profile.Property(_ => _.Name);
+
             profile.Property(_ => _.Password)
                 .IsRequired();
 
             profile.HasOne(_ => _.ProfilePicture);
 
             profile.HasMany(_ => _.PhotoAlbums);
-
-            profile.HasMany(_ => _.Followers);
-
             profile.HasMany(_ => _.Posts);
             profile.HasMany(_ => _.Notifications);
 
-         
+
         }
     }
 }

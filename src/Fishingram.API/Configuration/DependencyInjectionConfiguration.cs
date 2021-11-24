@@ -14,7 +14,6 @@ namespace Fishingram.API.Configuration
         public static IServiceCollection DependencyResolvers(this IServiceCollection services)
         {
             services.AddScoped<FishingramContext>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();

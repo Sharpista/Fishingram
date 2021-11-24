@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace Fishingram.DataAccess.Mappings
 {
-    public class NotificationMapping : IEntityTypeConfiguration<Notification>
+    public class FollowMapping : IEntityTypeConfiguration<Follow>
     {
-        public void Configure(EntityTypeBuilder<Notification> notification)
+        public void Configure(EntityTypeBuilder<Follow> builder)
         {
-            notification.HasKey(_ => _.Id);
-
-            notification.HasOne(_ => _.Sender);
+            builder.HasKey(b => b.Id);
+           
         }
     }
 }

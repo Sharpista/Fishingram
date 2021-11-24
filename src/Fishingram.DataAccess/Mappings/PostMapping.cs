@@ -16,11 +16,6 @@ namespace Fishingram.DataAccess.Mappings
             post.HasKey(_ => _.Id);
 
             post.HasOne(_ => _.Photo);
-
-            post.HasOne(_ => _.Recepient);
-
-            post.HasOne(_ => _.Sender);
-
             post.HasMany(_ => _.Notifications);
 
 

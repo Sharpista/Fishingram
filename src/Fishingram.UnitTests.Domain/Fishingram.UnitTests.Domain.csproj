@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Fishingram.Domain\Fishingram.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
 </Project>

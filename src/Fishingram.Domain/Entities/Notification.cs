@@ -7,14 +7,12 @@ namespace Fishingram.Domain.Entities
         public virtual string Content { get; private set; }
         public virtual UserProfile Sender { get; private set; }
         public virtual long SenderId { get; private set; }
-        public virtual UserProfile Recepient { get; private set; }
 
-        public Notification(string content, UserProfile sender, long senderId, UserProfile recepient)
+        public Notification(string content, UserProfile sender, long senderId)
         {
             Content = content;
             Sender = sender;
             SenderId = senderId;
-            Recepient = recepient;
         }
 
         public Notification()
