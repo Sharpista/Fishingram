@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fishingram.DataAccess.Migrations
 {
     [DbContext(typeof(FishingramContext))]
-    [Migration("20211124011128_first migration")]
-    partial class firstmigration
+    [Migration("20211125021843_minha primeira migration")]
+    partial class minhaprimeiramigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,15 +53,10 @@ namespace Fishingram.DataAccess.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("PostId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("SenderId")
+                    b.Property<long?>("SenderId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PostId");
 
                     b.HasIndex("SenderId");
 
@@ -104,7 +99,7 @@ namespace Fishingram.DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ProfileId")
+                    b.Property<long?>("ProfileId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -121,7 +116,7 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("PhotoId")
+                    b.Property<long?>("PhotoId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("PublishDateTime")
@@ -161,7 +156,7 @@ namespace Fishingram.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ProfilePictureId")
+                    b.Property<long?>("ProfilePictureId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -191,15 +186,9 @@ namespace Fishingram.DataAccess.Migrations
 
             modelBuilder.Entity("Fishingram.Domain.Entities.Notification", b =>
                 {
-                    b.HasOne("Fishingram.Domain.Entities.Post", null)
-                        .WithMany("Notifications")
-                        .HasForeignKey("PostId");
-
                     b.HasOne("Fishingram.Domain.Entities.UserProfile", "Sender")
                         .WithMany("Notifications")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SenderId");
 
                     b.Navigation("Sender");
                 });
@@ -215,9 +204,7 @@ namespace Fishingram.DataAccess.Migrations
                 {
                     b.HasOne("Fishingram.Domain.Entities.UserProfile", "Profile")
                         .WithMany("PhotoAlbums")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProfileId");
 
                     b.Navigation("Profile");
                 });
@@ -226,9 +213,7 @@ namespace Fishingram.DataAccess.Migrations
                 {
                     b.HasOne("Fishingram.Domain.Entities.Photo", "Photo")
                         .WithMany()
-                        .HasForeignKey("PhotoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PhotoId");
 
                     b.HasOne("Fishingram.Domain.Entities.UserProfile", null)
                         .WithMany("Posts")
@@ -241,9 +226,7 @@ namespace Fishingram.DataAccess.Migrations
                 {
                     b.HasOne("Fishingram.Domain.Entities.Photo", "ProfilePicture")
                         .WithMany()
-                        .HasForeignKey("ProfilePictureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProfilePictureId");
 
                     b.OwnsOne("Fishingram.Domain.ValueObject.Entities.FullAddress", "Address", b1 =>
                         {
@@ -283,11 +266,6 @@ namespace Fishingram.DataAccess.Migrations
             modelBuilder.Entity("Fishingram.Domain.Entities.PhotoAlbum", b =>
                 {
                     b.Navigation("Photos");
-                });
-
-            modelBuilder.Entity("Fishingram.Domain.Entities.Post", b =>
-                {
-                    b.Navigation("Notifications");
                 });
 
             modelBuilder.Entity("Fishingram.Domain.Entities.UserProfile", b =>

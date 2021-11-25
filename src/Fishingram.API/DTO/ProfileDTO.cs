@@ -15,10 +15,7 @@ namespace Fishingram.API.DTO
         public virtual string Password { get;  set; }
         public virtual FullAddress Address { get;  set; }
         public virtual PhotoDTO ProfilePicture { get;  set; }
-        public virtual long ProfilePictureId { get;  set; }
-        public virtual List<ProfileDTO> Followers { get;  set; }
         public virtual List<PostDTO> Posts { get;  set; }
-        public virtual List<NotificationDTO> Notifications { get;  set; }
         public virtual List<PhotoAlbumDTO> PhotoAlbums { get;  set; }
     }
 }

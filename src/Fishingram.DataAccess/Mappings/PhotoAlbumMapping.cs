@@ -15,7 +15,7 @@ namespace Fishingram.DataAccess.Mappings
         {
             photoAlbum.HasKey(_ => _.Id);
 
-            photoAlbum.HasOne(_ => _.Profile);
+            //photoAlbum.HasOne(_ => _.Profile);
 
             photoAlbum.HasMany(_ => _.Photos);
         }

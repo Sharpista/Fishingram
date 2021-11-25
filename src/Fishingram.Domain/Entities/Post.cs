@@ -8,16 +8,12 @@ namespace Fishingram.Domain.Entities
     {
         public virtual DateTime PublishDateTime { get; private set; }
         public virtual Photo Photo { get; private set; }
-        public virtual long PhotoId { get; private set; }
-        public virtual IList<Notification>Notifications { get; private set; }
 
 
-        public Post(Photo photo, long photoId)
+        public Post(Photo photo)
         {
             PublishDateTime = DateTime.Now;
             Photo = photo;
-            PhotoId = photoId;
-            Notifications = new List<Notification>();
         }
         public Post()
         {

@@ -10,7 +10,6 @@ namespace Fishingram.API.DTO
         public long Id { get; set; }
         public virtual string Content { get; set; }
         public virtual ProfileDTO Sender { get; set; }
-        public virtual long SenderId { get; set; }
-        public virtual ProfileDTO Recepient { get; set; }
+  
     }
 }

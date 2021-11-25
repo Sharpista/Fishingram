@@ -12,7 +12,6 @@ namespace Fishingram.API.DTO
         [Key]
         public long Id { get; set; }
         public virtual string FileName { get; set; }
-        public virtual Stream BinaryContent { get; set; }
         public virtual string ContentType { get; set; }
     }
 }

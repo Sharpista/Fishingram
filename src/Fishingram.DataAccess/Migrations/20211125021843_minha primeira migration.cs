@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Fishingram.DataAccess.Migrations
 {
-    public partial class firstmigration : Migration
+    public partial class minhaprimeiramigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,15 +29,15 @@ namespace Fishingram.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Address_ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address_Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address_State = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address_UF = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProfilePictureId = table.Column<long>(type: "bigint", nullable: false)
+                    ProfilePictureId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,7 +47,7 @@ namespace Fishingram.DataAccess.Migrations
                         column: x => x.ProfilePictureId,
                         principalTable: "Photos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,12 +77,32 @@ namespace Fishingram.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SenderId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Profiles_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PhotoAlbums",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfileId = table.Column<long>(type: "bigint", nullable: false),
+                    ProfileId = table.Column<long>(type: "bigint", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -94,7 +114,7 @@ namespace Fishingram.DataAccess.Migrations
                         column: x => x.ProfileId,
                         principalTable: "Profiles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,7 +124,7 @@ namespace Fishingram.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PublishDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PhotoId = table.Column<long>(type: "bigint", nullable: false),
+                    PhotoId = table.Column<long>(type: "bigint", nullable: true),
                     UserProfileId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
@@ -115,40 +135,13 @@ namespace Fishingram.DataAccess.Migrations
                         column: x => x.PhotoId,
                         principalTable: "Photos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Posts_Profiles_UserProfileId",
                         column: x => x.UserProfileId,
                         principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Notifications",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SenderId = table.Column<long>(type: "bigint", nullable: false),
-                    PostId = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notifications", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Notifications_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Notifications_Profiles_SenderId",
-                        column: x => x.SenderId,
-                        principalTable: "Profiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -160,11 +153,6 @@ namespace Fishingram.DataAccess.Migrations
                 name: "IX_Follows_FollowingId",
                 table: "Follows",
                 column: "FollowingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notifications_PostId",
-                table: "Notifications",
-                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_SenderId",

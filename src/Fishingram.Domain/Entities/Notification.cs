@@ -6,13 +6,11 @@ namespace Fishingram.Domain.Entities
     {
         public virtual string Content { get; private set; }
         public virtual UserProfile Sender { get; private set; }
-        public virtual long SenderId { get; private set; }
 
-        public Notification(string content, UserProfile sender, long senderId)
+        public Notification(string content, UserProfile sender)
         {
             Content = content;
             Sender = sender;
-            SenderId = senderId;
         }
 
         public Notification()
