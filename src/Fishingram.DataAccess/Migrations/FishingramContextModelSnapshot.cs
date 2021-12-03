@@ -231,13 +231,16 @@ namespace Fishingram.DataAccess.Migrations
                                 .HasColumnType("bigint")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                            b1.Property<string>("Adress")
+                            b1.Property<string>("District")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("Country")
+                            b1.Property<string>("Number")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("State")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Street")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("UF")

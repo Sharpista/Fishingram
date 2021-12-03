@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fishingram.DataAccess.Migrations
 {
     [DbContext(typeof(FishingramContext))]
-    [Migration("20211125023214_segunda migration")]
-    partial class segundamigration
+    [Migration("20211203034122_terceira migration")]
+    partial class terceiramigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,13 +233,16 @@ namespace Fishingram.DataAccess.Migrations
                                 .HasColumnType("bigint")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                            b1.Property<string>("District")
+                                .HasColumnType("nvarchar(max)");
+
                             b1.Property<string>("Number")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("Street")
+                            b1.Property<string>("State")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("State")
+                            b1.Property<string>("Street")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("UF")

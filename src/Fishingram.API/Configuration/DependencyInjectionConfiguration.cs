@@ -1,6 +1,8 @@
 ﻿using Fishingram.DataAccess.Context;
 using Fishingram.DataAccess.Repositories;
 using Fishingram.Domain.Interfaces.Repositories;
+using Fishingram.Domain.Interfaces.Services;
+using Fishingram.Service.Entities.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,11 @@ namespace Fishingram.API.Configuration
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IPhotoAlbumRepository, PhotoAlbumRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
+
+            services.AddScoped<IProfileService, ProfileService>();
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IPhotoAlbumService, PhotoAlbumService>();
+            services.AddScoped<IPhotoService, PhotoService>();
 
             return services;
         }
