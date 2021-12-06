@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Fishingram.Domain.Interfaces.Services
 {
-    public interface IPostService : IServiceBase<Post>
+    public interface ILoginService : IServiceBase<Login>
     {
-        Task<IEnumerable<Post>> GetAllPostFromUser(long id);
+        Task<Login>Login(string name, string password);
     }
 }

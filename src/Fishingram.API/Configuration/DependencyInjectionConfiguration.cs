@@ -18,14 +18,15 @@ namespace Fishingram.API.Configuration
             services.AddScoped<FishingramContext>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IPhotoAlbumRepository, PhotoAlbumRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
 
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IPhotoAlbumService, PhotoAlbumService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<ILoginService, LoginService>();
 
             return services;
         }

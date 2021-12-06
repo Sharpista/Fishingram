@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace Fishingram.DataAccess.Mappings
 {
-    public class NotificationMapping : IEntityTypeConfiguration<Notification>
+    public class LoginMapping : IEntityTypeConfiguration<Login>
     {
-        public void Configure(EntityTypeBuilder<Notification> notification)
+        public void Configure(EntityTypeBuilder<Login> builder)
         {
-            notification.HasKey(_ => _.Id);
-
-            notification.HasOne(_ => _.Sender);
+            builder.HasKey(x => x.Id);
+            builder.HasIndex(x => x.Email).IsUnique();
         }
     }
 }

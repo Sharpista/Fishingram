@@ -13,9 +13,12 @@ namespace Fishingram.DataAccess.Mappings
     {
         public void Configure(EntityTypeBuilder<Post> post)
         {
+            post.Property(_ => _.PublishDateTime).HasColumnName("DataDePublicacao");
             post.HasKey(_ => _.Id);
 
             post.HasOne(_ => _.Photo);
+
+
 
 
         }

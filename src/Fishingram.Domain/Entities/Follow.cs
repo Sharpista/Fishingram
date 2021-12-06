@@ -4,7 +4,7 @@ namespace Fishingram.Domain.Entities
 {
     public class Follow : EntityBase
     {
-        public UserProfile Follower { get; set; }
+        public UserProfile Followed { get; set; }
         public UserProfile Following { get; set; }
 
     }

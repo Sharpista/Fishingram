@@ -14,9 +14,8 @@ namespace Fishingram.DataAccess.Mappings
         public void Configure(EntityTypeBuilder<PhotoAlbum> photoAlbum)
         {
             photoAlbum.HasKey(_ => _.Id);
-
-            //photoAlbum.HasOne(_ => _.Profile);
-
+            photoAlbum.Property(_ => _.CreationDate).HasColumnName("DataDeCriacao");
+            photoAlbum.Property(_ => _.Description).HasColumnName("Descricao");
             photoAlbum.HasMany(_ => _.Photos);
         }
     }

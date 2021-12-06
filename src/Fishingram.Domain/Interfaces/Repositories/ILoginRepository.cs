@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Fishingram.Domain.Interfaces.Repositories
 {
-    public interface IPhotoAlbumRepository : IRepository<PhotoAlbum>
+    public interface ILoginRepository : IRepository<Login>
     {
-        Task<IEnumerable<PhotoAlbum>> GetAllPhotoAlbumsFromUser(long id);
+        Task<Login> Login(string email, string password);
     }
 }

@@ -16,7 +16,7 @@ namespace Fishingram.API.Configuration
             CreateMap<Post, PostDTO>().ReverseMap();
             CreateMap<PhotoAlbum, PhotoAlbumDTO>().ReverseMap();
             CreateMap<Photo, PhotoDTO>().ReverseMap();
-            CreateMap<Notification, NotificationDTO>().ReverseMap();
+            CreateMap<Login, LoginDTO>().ReverseMap();
         }
     }
 }

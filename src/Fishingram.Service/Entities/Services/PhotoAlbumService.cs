@@ -16,5 +16,10 @@ namespace Fishingram.Service.Entities.Services
         {
             _photoAlbumRepository = repository;
         }
+
+        public async Task<IEnumerable<PhotoAlbum>> GetPhotoAlbumsFromUser(long id)
+        {
+            return await _photoAlbumRepository.GetAllPhotoAlbumsFromUser(id);
+        }
     }
 }

@@ -3,6 +3,7 @@ using Fishingram.Domain.Interfaces.Repositories;
 using Fishingram.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fishingram.DataAccess.Repositories
@@ -56,5 +57,7 @@ namespace Fishingram.DataAccess.Repositories
         {
             Db?.Dispose();
         }
+
+   
     }
 }

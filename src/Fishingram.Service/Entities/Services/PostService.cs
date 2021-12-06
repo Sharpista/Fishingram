@@ -16,5 +16,10 @@ namespace Fishingram.Service.Entities.Services
         {
             _repository = repository;
         }
+
+        public async Task<IEnumerable<Post>> GetAllPostFromUser(long id)
+        {
+            return await  _repository.GetAllPostFromUser(id);
+        }
     }
 }

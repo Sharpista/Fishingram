@@ -9,5 +9,6 @@ namespace Fishingram.Domain.Interfaces.Repositories
 {
     public interface IPostRepository : IRepository<Post>
     {
+        Task<IEnumerable<Post>> GetAllPostFromUser(long id);
     }
 }

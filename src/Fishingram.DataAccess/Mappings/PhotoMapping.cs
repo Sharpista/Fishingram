@@ -14,6 +14,8 @@ namespace Fishingram.DataAccess.Mappings
         public void Configure(EntityTypeBuilder<Photo> photo)
         {
             photo.HasKey(_ => _.Id);
+            photo.Property(_ => _.ContentType).HasColumnName("TipoDoConteudo");
+            photo.Property(_ => _.FileName).HasColumnName("NomeDoArquivo");
         }
     }
 }

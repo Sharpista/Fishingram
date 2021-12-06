@@ -3,6 +3,7 @@ using Fishingram.API.DTO;
 using Fishingram.Domain.Entities;
 using Fishingram.Domain.Interfaces.Repositories;
 using Fishingram.Domain.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,14 +28,14 @@ namespace Fishingram.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<IEnumerable<ProfileDTO>>> GetAllProfiles()
         {
             var profiles = _mapper.Map<IEnumerable<ProfileDTO>>(await _profileService.GetAll());
 
             return Ok(profiles);
         }
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("{id}")]
         public async Task<ActionResult<ProfileDTO>> GetProfileById(long id)
         {
@@ -53,7 +54,7 @@ namespace Fishingram.API.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("{id}")]
         public async Task<ActionResult<ProfileDTO>> UpdateProfile(long id, ProfileDTO dto) 
         {
@@ -63,7 +64,7 @@ namespace Fishingram.API.Controllers
 
             return Ok(profile);
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize]
         public async Task<ActionResult<ProfileDTO>>DeleteProfile(long id)
         {
             var profile = _mapper.Map<ProfileDTO>(await _profileService.GetById(id));

@@ -9,5 +9,6 @@ namespace Fishingram.Domain.Interfaces.Services
 {
     public interface IPhotoAlbumService : IServiceBase<PhotoAlbum>
     {
+        Task<IEnumerable<PhotoAlbum>> GetPhotoAlbumsFromUser(long id);
     }
 }

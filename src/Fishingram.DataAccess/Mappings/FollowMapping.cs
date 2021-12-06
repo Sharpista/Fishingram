@@ -14,6 +14,7 @@ namespace Fishingram.DataAccess.Mappings
         public void Configure(EntityTypeBuilder<Follow> builder)
         {
             builder.HasKey(b => b.Id);
+
            
         }
     }

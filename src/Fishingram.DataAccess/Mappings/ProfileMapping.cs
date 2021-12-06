@@ -14,22 +14,19 @@ namespace Fishingram.DataAccess.Mappings
         public void Configure(EntityTypeBuilder<UserProfile> profile)
         {
             profile.HasKey(_ => _.Id);
-            profile.HasIndex(_ => _.Email).IsUnique();
 
-            profile.Property(_ => _.Email)
-                .HasMaxLength(50)
-                .IsRequired();
-            profile.OwnsOne(_ => _.Address);
-            profile.Property(_ => _.Name);
+            profile.Property(_ => _.Name).HasColumnName("Nome");
 
-            profile.Property(_ => _.Password)
-                .IsRequired();
 
+
+            profile.Property(_ =>_.State ).HasColumnName("Estado");
+            profile.Property(_ => _.Street).HasColumnName("Rua");
+            profile.Property(_ => _.ZipCode).HasColumnName("CEP");
+            profile.Property(_ => _.Complement).HasColumnName("Complemento");
+            profile.Property(_ => _.City).HasColumnName("Cidade");
+            profile.Property(_ => _.BirthDate).HasColumnName("DataDeNascimento");
             profile.HasOne(_ => _.ProfilePicture);
-
-            profile.HasMany(_ => _.PhotoAlbums);
-            profile.HasMany(_ => _.Posts);
-            profile.HasMany(_ => _.Notifications);
+ 
 
 
         }

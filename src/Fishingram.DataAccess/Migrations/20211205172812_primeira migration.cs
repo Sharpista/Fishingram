@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Fishingram.DataAccess.Migrations
 {
-    public partial class minhaprimeiramigration : Migration
+    public partial class primeiramigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,8 @@ namespace Fishingram.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PhotoAlbumId = table.Column<long>(type: "bigint", nullable: true),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    NomeDoArquivo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TipoDoConteudo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,15 +28,16 @@ namespace Fishingram.DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Address_ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address_Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address_State = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address_UF = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataDeNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CEP = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rua = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProfilePictureId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
@@ -56,15 +57,15 @@ namespace Fishingram.DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FollowerId = table.Column<long>(type: "bigint", nullable: true),
+                    FollowedId = table.Column<long>(type: "bigint", nullable: true),
                     FollowingId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Follows", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Follows_Profiles_FollowerId",
-                        column: x => x.FollowerId,
+                        name: "FK_Follows_Profiles_FollowedId",
+                        column: x => x.FollowedId,
                         principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -102,16 +103,16 @@ namespace Fishingram.DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfileId = table.Column<long>(type: "bigint", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataDeCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserProfileId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PhotoAlbums", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PhotoAlbums_Profiles_ProfileId",
-                        column: x => x.ProfileId,
+                        name: "FK_PhotoAlbums_Profiles_UserProfileId",
+                        column: x => x.UserProfileId,
                         principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -123,7 +124,7 @@ namespace Fishingram.DataAccess.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PublishDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataDePublicacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PhotoId = table.Column<long>(type: "bigint", nullable: true),
                     UserProfileId = table.Column<long>(type: "bigint", nullable: true)
                 },
@@ -145,9 +146,9 @@ namespace Fishingram.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Follows_FollowerId",
+                name: "IX_Follows_FollowedId",
                 table: "Follows",
-                column: "FollowerId");
+                column: "FollowedId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Follows_FollowingId",
@@ -160,9 +161,9 @@ namespace Fishingram.DataAccess.Migrations
                 column: "SenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PhotoAlbums_ProfileId",
+                name: "IX_PhotoAlbums_UserProfileId",
                 table: "PhotoAlbums",
-                column: "ProfileId");
+                column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_PhotoAlbumId",
@@ -178,12 +179,6 @@ namespace Fishingram.DataAccess.Migrations
                 name: "IX_Posts_UserProfileId",
                 table: "Posts",
                 column: "UserProfileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Profiles_Email",
-                table: "Profiles",
-                column: "Email",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Profiles_ProfilePictureId",
@@ -202,7 +197,7 @@ namespace Fishingram.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_PhotoAlbums_Profiles_ProfileId",
+                name: "FK_PhotoAlbums_Profiles_UserProfileId",
                 table: "PhotoAlbums");
 
             migrationBuilder.DropTable(
