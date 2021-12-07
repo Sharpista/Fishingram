@@ -9,5 +9,6 @@ namespace Fishingram.Domain.Interfaces.Repositories
 {
     public interface IFollowRepository : IRepository<Follow>
     {
+       
     }
 }

@@ -28,14 +28,14 @@ namespace Fishingram.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<ProfileDTO>>> GetAllProfiles()
         {
             var profiles = _mapper.Map<IEnumerable<ProfileDTO>>(await _profileService.GetAll());
 
             return Ok(profiles);
         }
-        [HttpGet, Authorize]
+        [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<ProfileDTO>> GetProfileById(long id)
         {
@@ -54,7 +54,7 @@ namespace Fishingram.API.Controllers
             return Ok();
         }
 
-        [HttpPut, Authorize]
+        [HttpPut]
         [Route("{id}")]
         public async Task<ActionResult<ProfileDTO>> UpdateProfile(long id, ProfileDTO dto) 
         {

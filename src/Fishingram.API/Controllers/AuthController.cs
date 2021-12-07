@@ -39,8 +39,8 @@ namespace Fishingram.API.Controllers
             var login = _mapper.Map<Login>(dto);
 
             var obj = await _loginService.Login(login.Email, login.Password);
-           if (obj != null)
-           {
+            if (obj != null)
+            {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var tokeOptions = new JwtSecurityToken(
@@ -52,11 +52,11 @@ namespace Fishingram.API.Controllers
                 );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
                 return Ok(new { Token = tokenString });
-           }
-           else
-           {
+            }
+            else
+            {
                 return Unauthorized();
-           }
+            }
         }
     }
 }
