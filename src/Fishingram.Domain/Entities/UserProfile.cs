@@ -16,7 +16,7 @@ namespace Fishingram.Domain.Entities
         public virtual string State { get; private set; }
         public virtual string City { get; private set; }
         public virtual Photo ProfilePicture { get; private set; }
-        public virtual  Login Login { get; private set; }
+        public virtual  Login Login { get;  set; }
 
         public UserProfile(string name, Login login, DateTime birthDate, string zipCode, string street, string number, string complement, string state, string city, Photo profilePicture)
         {

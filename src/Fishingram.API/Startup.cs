@@ -1,5 +1,6 @@
 using Fishingram.API.Configuration;
 using Fishingram.DataAccess.Context;
+using Fishingram.Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Text;
 
@@ -27,24 +29,6 @@ namespace Fishingram.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAuthentication(opt =>
-            //{
-            //    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(opt =>
-            //{
-            //    opt.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidateAudience = true,
-            //        ValidateLifetime = true,
-            //        ValidateIssuerSigningKey = true,
-            //        ValidIssuer = "http://localhost:5000",
-            //        ValidAudience = "http://localhost:5000",
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
-            //    };
-            //});
-
             services.AddControllers();
             services.AddCors( opt => {
                 opt.AddPolicy("CorsPolicy", builder => builder
@@ -53,11 +37,57 @@ namespace Fishingram.API
                 .AllowAnyHeader());
 
              });
+
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+
+                };
+            });
+
             services.DependencyResolvers();
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fishingram.API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    Type = SecuritySchemeType.ApiKey,
+                    In = ParameterLocation.Header,
+                    Scheme = "Bearer",
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+               {
+                   {
+                       new OpenApiSecurityScheme
+                       {
+                           Reference = new OpenApiReference
+                           {
+                               Type = ReferenceType.SecurityScheme,
+                               Id = "Bearer"
+                           }
+                       }, new string[]{}
+                   }
+               });
+              
             });
 
             var connectionString = Configuration.GetConnectionString("ProductDB");
@@ -80,7 +110,7 @@ namespace Fishingram.API
 
             app.UseRouting();
 
-           // app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -3,6 +3,7 @@ using Fishingram.API.DTO;
 using Fishingram.Domain.Entities;
 using Fishingram.Domain.Interfaces.Repositories;
 using Fishingram.Domain.Interfaces.Services;
+using Fishingram.Service.Entities.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -31,32 +32,28 @@ namespace Fishingram.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost, Route("login")]
-        public async Task<ActionResult<LoginDTO>> Login(LoginDTO dto)
+        [HttpPost]
+        [Route("auth")]
+        public async Task<ActionResult<dynamic>> Authenticate(LoginDTO dto)
         {
             if (dto == null) return BadRequest("Login Inválido");
 
-            var login = _mapper.Map<Login>(dto);
+            var loginMapper = _mapper.Map<Login>(dto);
 
-            var obj = await _loginService.Login(login.Email, login.Password);
-            if (obj != null)
+            var login = await _loginService.Login(loginMapper.Email, loginMapper.Password);
+
+            if (login == null) return NotFound(new { message = "Usuário ou senha inválidos" });
+
+
+            var token = TokenService.GenerateToken(login);
+
+
+            return new
             {
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
-                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                var tokeOptions = new JwtSecurityToken(
-                    issuer: "http://localhost:5001",
-                    audience: "http://localhost:5001",
-                    claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(5),
-                    signingCredentials: signinCredentials
-                );
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-                return Ok(new { Token = tokenString });
-            }
-            else
-            {
-                return Unauthorized();
-            }
+                login = login,
+                token = token
+            };
+       
         }
     }
 }

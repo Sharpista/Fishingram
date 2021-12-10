@@ -21,9 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Testes", "05-Testes", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fishingram.UnitTests.Domain", "src\Fishingram.UnitTests.Domain\Fishingram.UnitTests.Domain.csproj", "{558F3986-80DB-4C62-B38C-E73D86CCEFF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fishingram.Service", "src\Fishingram.Service\Fishingram.Service.csproj", "{54EE70D3-22EA-4146-B033-8D20D9DCE22F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fishingram.Service", "src\Fishingram.Service\Fishingram.Service.csproj", "{54EE70D3-22EA-4146-B033-8D20D9DCE22F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fishingram.DataAccess", "src\Fishingram.DataAccess\Fishingram.DataAccess.csproj", "{66408DAC-D9F6-49E8-A308-F408503C8EF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fishingram.DataAccess", "src\Fishingram.DataAccess\Fishingram.DataAccess.csproj", "{66408DAC-D9F6-49E8-A308-F408503C8EF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

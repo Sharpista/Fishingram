@@ -3,6 +3,7 @@ using Fishingram.API.DTO;
 using Fishingram.Domain.Entities;
 using Fishingram.Domain.Interfaces.Repositories;
 using Fishingram.Domain.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Fishingram.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class PhotoAlbumController : ControllerBase
     {
         private readonly IPhotoAlbumRepository _photoAlbumRepository;

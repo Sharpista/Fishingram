@@ -3,6 +3,7 @@ using Fishingram.API.DTO;
 using Fishingram.Domain.Entities;
 using Fishingram.Domain.Interfaces.Repositories;
 using Fishingram.Domain.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,6 +15,7 @@ namespace Fishingram.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class PostController : ControllerBase
     {
         private readonly IPostRepository _postRepository;
@@ -26,7 +28,6 @@ namespace Fishingram.API.Controllers
             _postService = postService;
             _mapper = mapper;
         }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PostDTO>>> GetAllPosts()
         {

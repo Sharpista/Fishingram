@@ -64,7 +64,7 @@ namespace Fishingram.API.Controllers
 
             return Ok(profile);
         }
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<ProfileDTO>>DeleteProfile(long id)
         {
             var profile = _mapper.Map<ProfileDTO>(await _profileService.GetById(id));
