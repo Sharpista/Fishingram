@@ -4,16 +4,13 @@ using Fishingram.Domain.Entities;
 using Fishingram.Domain.Interfaces.Repositories;
 using Fishingram.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fishingram.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProfileController : ControllerBase
     {
@@ -43,6 +40,7 @@ namespace Fishingram.API.Controllers
             return Ok(profile);
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<ProfileDTO>>PostProfile(ProfileDTO dto)
         {
             if (!ModelState.IsValid) return BadRequest();

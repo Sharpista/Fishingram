@@ -5,6 +5,6 @@ namespace Fishingram.Domain.Interfaces.Repositories
 {
     public interface IProfileRepository : IRepository<UserProfile>
     {
-        Task<UserProfile> Login(string name, string password);
+        Task<UserProfile> Authenticate(string name, string password);
     }
 }

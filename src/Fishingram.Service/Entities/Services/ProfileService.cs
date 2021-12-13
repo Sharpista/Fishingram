@@ -13,9 +13,9 @@ namespace Fishingram.Service.Entities.Services
             _repository = repository;
         }
 
-        public async Task<UserProfile> Login(string email, string password)
+        public async Task<UserProfile> Auntenticate(string email, string password)
         {
-            return await _repository.Login(email, password);
+            return await _repository.Authenticate(email, password);
         }
     }
 }

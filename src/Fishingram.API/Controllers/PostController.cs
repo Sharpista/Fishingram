@@ -13,19 +13,20 @@ using System.Threading.Tasks;
 
 namespace Fishingram.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class PostController : ControllerBase
     {
         private readonly IPostRepository _postRepository;
         private readonly IPostService _postService;
+        private readonly IProfileService _profileService;
         private readonly IMapper _mapper;
 
-        public PostController(IPostRepository postRepository, IPostService postService, IMapper mapper)
+        public PostController(IPostRepository postRepository, IPostService postService,IProfileService profileService,  IMapper mapper)
         {
             _postRepository = postRepository;
             _postService = postService;
+            _profileService = profileService;
             _mapper = mapper;
         }
         [HttpGet]
@@ -47,11 +48,17 @@ namespace Fishingram.API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
 
+            var user = await _profileService.GetById(dto.ProfileId);
+
+
+
             var post = _mapper.Map<Post>(dto);
 
-            await _postService.Add(post);
+            var newPost = new Post(post.Photo, post.Description, post.Title, post.ProfileId);
 
-            return Ok();
+            await _postService.Add(newPost);
+
+            return Ok(newPost);
         }
 
         [HttpPut]

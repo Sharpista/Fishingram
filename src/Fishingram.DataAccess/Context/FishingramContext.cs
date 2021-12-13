@@ -15,7 +15,6 @@ namespace Fishingram.DataAccess.Context
         public DbSet<PhotoAlbum> PhotoAlbums { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Follow> Follows { get; set; }
-        public DbSet<Login> Login { get; set; }
         public FishingramContext(DbContextOptions<FishingramContext> options) : base(options)
         {
         }

@@ -16,9 +16,9 @@ namespace Fishingram.DataAccess.Mappings
             profile.HasKey(_ => _.Id);
 
             profile.Property(_ => _.Name).HasColumnName("Nome");
-
-
-
+            profile.Property(_ => _.CPF).HasColumnName("CPF");
+            profile.Property(_ => _.Email).HasColumnName("Email").IsRequired();
+            profile.Property(_ => _.Password).HasColumnName("Senha").IsRequired();
             profile.Property(_ =>_.State ).HasColumnName("Estado");
             profile.Property(_ => _.Street).HasColumnName("Rua");
             profile.Property(_ => _.ZipCode).HasColumnName("CEP");

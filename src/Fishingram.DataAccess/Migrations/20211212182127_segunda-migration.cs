@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Fishingram.DataAccess.Migrations
 {
@@ -7,18 +6,18 @@ namespace Fishingram.DataAccess.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<byte[]>(
-                name: "BinaryContent",
-                table: "Photos",
-                type: "varbinary(max)",
+            migrationBuilder.AddColumn<string>(
+                name: "District",
+                table: "Profiles",
+                type: "nvarchar(max)",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "BinaryContent",
-                table: "Photos");
+                name: "District",
+                table: "Profiles");
         }
     }
 }

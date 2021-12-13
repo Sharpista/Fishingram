@@ -17,18 +17,18 @@ using System.Threading.Tasks;
 
 namespace Fishingram.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly ILoginRepository _loginRepository;
-        private readonly ILoginService _loginService;
+        private readonly IProfileRepository _profileRepository;
+        private readonly IProfileService _profileService;
         private readonly IMapper _mapper;
 
-        public AuthController(ILoginRepository loginRepository, ILoginService loginService, IMapper mapper)
+        public AuthController(IProfileRepository profileRepository, IProfileService profileService, IMapper mapper)
         {
-            _loginRepository = loginRepository;
-            _loginService = loginService;
+            _profileRepository = profileRepository;
+            _profileService = profileService;
             _mapper = mapper;
         }
 
@@ -36,21 +36,21 @@ namespace Fishingram.API.Controllers
         [Route("auth")]
         public async Task<ActionResult<dynamic>> Authenticate(LoginDTO dto)
         {
-            if (dto == null) return BadRequest("Login Inválido");
+            if (dto == null) return BadRequest("Authenticate Inválido");
 
-            var loginMapper = _mapper.Map<Login>(dto);
+            var userMapper = _mapper.Map<UserProfile>(dto);
 
-            var login = await _loginService.Login(loginMapper.Email, loginMapper.Password);
+            var user = await _profileService.Auntenticate(userMapper.Email, userMapper.Password);
 
-            if (login == null) return NotFound(new { message = "Usuário ou senha inválidos" });
+            if (user == null) return NotFound(new { message = "Usuário ou senha inválidos" });
 
 
-            var token = TokenService.GenerateToken(login);
+            var token = TokenService.GenerateToken(user);
 
 
             return new
             {
-                login = login,
+                login = user,
                 token = token
             };
        

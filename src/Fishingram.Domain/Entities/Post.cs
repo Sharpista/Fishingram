@@ -9,13 +9,19 @@ namespace Fishingram.Domain.Entities
         public virtual DateTime PublishDateTime { get; private set; }
         public virtual Photo Photo { get; private set; }
         public virtual UserProfile Profile { get; private set; }
+        public virtual long  ProfileId { get; private set; }
+        public virtual string Description { get; private set; }
+        public virtual string Title { get; private set; }
 
 
-        public Post(Photo photo, UserProfile profile)
+        public Post(Photo photo,  string description, string title, long profileId)
         {
-            Profile = profile;
+            ProfileId = profileId;
             PublishDateTime = DateTime.Now;
             Photo = photo;
+            Description = description;
+            Title = title;
+
         }
         public Post()
         {

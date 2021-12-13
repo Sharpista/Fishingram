@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Fishingram.API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class FollowController : ControllerBase

@@ -12,7 +12,7 @@ namespace Fishingram.Service.Entities.Services
 {
     public static class TokenService
     {
-        public static string GenerateToken(Login login)
+        public static string GenerateToken(UserProfile profile)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -20,7 +20,7 @@ namespace Fishingram.Service.Entities.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Email, login.Email.ToString()),
+                    new Claim(ClaimTypes.Email, profile.Email.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

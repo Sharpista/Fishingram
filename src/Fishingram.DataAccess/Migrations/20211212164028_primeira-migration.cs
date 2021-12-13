@@ -15,6 +15,7 @@ namespace Fishingram.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PhotoAlbumId = table.Column<long>(type: "bigint", nullable: true),
                     NomeDoArquivo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TipoDoConteudo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -29,8 +30,9 @@ namespace Fishingram.DataAccess.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CPF = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DataDeNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CEP = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rua = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -78,26 +80,6 @@ namespace Fishingram.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Notifications",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SenderId = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notifications", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Notifications_Profiles_SenderId",
-                        column: x => x.SenderId,
-                        principalTable: "Profiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PhotoAlbums",
                 columns: table => new
                 {
@@ -105,14 +87,14 @@ namespace Fishingram.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DataDeCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserProfileId = table.Column<long>(type: "bigint", nullable: true)
+                    ProfileId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PhotoAlbums", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PhotoAlbums_Profiles_UserProfileId",
-                        column: x => x.UserProfileId,
+                        name: "FK_PhotoAlbums_Profiles_ProfileId",
+                        column: x => x.ProfileId,
                         principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -126,7 +108,7 @@ namespace Fishingram.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DataDePublicacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PhotoId = table.Column<long>(type: "bigint", nullable: true),
-                    UserProfileId = table.Column<long>(type: "bigint", nullable: true)
+                    ProfileId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -138,8 +120,8 @@ namespace Fishingram.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Posts_Profiles_UserProfileId",
-                        column: x => x.UserProfileId,
+                        name: "FK_Posts_Profiles_ProfileId",
+                        column: x => x.ProfileId,
                         principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -156,14 +138,9 @@ namespace Fishingram.DataAccess.Migrations
                 column: "FollowingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notifications_SenderId",
-                table: "Notifications",
-                column: "SenderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PhotoAlbums_UserProfileId",
+                name: "IX_PhotoAlbums_ProfileId",
                 table: "PhotoAlbums",
-                column: "UserProfileId");
+                column: "ProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_PhotoAlbumId",
@@ -176,9 +153,9 @@ namespace Fishingram.DataAccess.Migrations
                 column: "PhotoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_UserProfileId",
+                name: "IX_Posts_ProfileId",
                 table: "Posts",
-                column: "UserProfileId");
+                column: "ProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Profiles_ProfilePictureId",
@@ -197,14 +174,11 @@ namespace Fishingram.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_PhotoAlbums_Profiles_UserProfileId",
+                name: "FK_PhotoAlbums_Profiles_ProfileId",
                 table: "PhotoAlbums");
 
             migrationBuilder.DropTable(
                 name: "Follows");
-
-            migrationBuilder.DropTable(
-                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Posts");

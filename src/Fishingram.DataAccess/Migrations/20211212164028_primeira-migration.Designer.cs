@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fishingram.DataAccess.Migrations
 {
     [DbContext(typeof(FishingramContext))]
-    [Migration("20211205172812_primeira migration")]
+    [Migration("20211212164028_primeira-migration")]
     partial class primeiramigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,26 +43,6 @@ namespace Fishingram.DataAccess.Migrations
                     b.ToTable("Follows");
                 });
 
-            modelBuilder.Entity("Fishingram.Domain.Entities.Notification", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("SenderId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Notifications");
-                });
-
             modelBuilder.Entity("Fishingram.Domain.Entities.Photo", b =>
                 {
                     b.Property<long>("Id")
@@ -77,6 +57,9 @@ namespace Fishingram.DataAccess.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("NomeDoArquivo");
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("PhotoAlbumId")
                         .HasColumnType("bigint");
@@ -103,12 +86,12 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Descricao");
 
-                    b.Property<long?>("UserProfileId")
+                    b.Property<long?>("ProfileId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserProfileId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("PhotoAlbums");
                 });
@@ -123,18 +106,18 @@ namespace Fishingram.DataAccess.Migrations
                     b.Property<long?>("PhotoId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("ProfileId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("PublishDateTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("DataDePublicacao");
-
-                    b.Property<long?>("UserProfileId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PhotoId");
 
-                    b.HasIndex("UserProfileId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Posts");
                 });
@@ -150,6 +133,10 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataDeNascimento");
 
+                    b.Property<string>("CPF")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CPF");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Cidade");
@@ -160,8 +147,7 @@ namespace Fishingram.DataAccess.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Email");
 
                     b.Property<string>("Name")
@@ -213,15 +199,6 @@ namespace Fishingram.DataAccess.Migrations
                     b.Navigation("Following");
                 });
 
-            modelBuilder.Entity("Fishingram.Domain.Entities.Notification", b =>
-                {
-                    b.HasOne("Fishingram.Domain.Entities.UserProfile", "Sender")
-                        .WithMany("Notifications")
-                        .HasForeignKey("SenderId");
-
-                    b.Navigation("Sender");
-                });
-
             modelBuilder.Entity("Fishingram.Domain.Entities.Photo", b =>
                 {
                     b.HasOne("Fishingram.Domain.Entities.PhotoAlbum", null)
@@ -231,9 +208,11 @@ namespace Fishingram.DataAccess.Migrations
 
             modelBuilder.Entity("Fishingram.Domain.Entities.PhotoAlbum", b =>
                 {
-                    b.HasOne("Fishingram.Domain.Entities.UserProfile", null)
-                        .WithMany("PhotoAlbums")
-                        .HasForeignKey("UserProfileId");
+                    b.HasOne("Fishingram.Domain.Entities.UserProfile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileId");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Fishingram.Domain.Entities.Post", b =>
@@ -242,11 +221,13 @@ namespace Fishingram.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("PhotoId");
 
-                    b.HasOne("Fishingram.Domain.Entities.UserProfile", null)
-                        .WithMany("Posts")
-                        .HasForeignKey("UserProfileId");
+                    b.HasOne("Fishingram.Domain.Entities.UserProfile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileId");
 
                     b.Navigation("Photo");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Fishingram.Domain.Entities.UserProfile", b =>
@@ -261,15 +242,6 @@ namespace Fishingram.DataAccess.Migrations
             modelBuilder.Entity("Fishingram.Domain.Entities.PhotoAlbum", b =>
                 {
                     b.Navigation("Photos");
-                });
-
-            modelBuilder.Entity("Fishingram.Domain.Entities.UserProfile", b =>
-                {
-                    b.Navigation("Notifications");
-
-                    b.Navigation("PhotoAlbums");
-
-                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

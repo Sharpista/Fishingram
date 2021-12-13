@@ -13,9 +13,9 @@ namespace Fishingram.DataAccess.Repositories
         {
         }
 
-        public async Task<UserProfile> Login(string email, string password)
+        public async Task<UserProfile> Authenticate(string email, string password)
         {
-            return await DbSet.AsNoTracking().Where(x => x.Login.Email == email && x.Login.Password == password).SingleOrDefaultAsync();
+            return await DbSet.AsNoTracking().Where(x => x.Email == email && x.Password == password).SingleOrDefaultAsync();
         }
     }
 }

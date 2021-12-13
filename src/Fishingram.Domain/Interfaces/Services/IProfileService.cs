@@ -5,6 +5,6 @@ namespace Fishingram.Domain.Interfaces.Services
 {
     public interface IProfileService : IServiceBase<UserProfile>
     {
-        Task<UserProfile> Login(string email, string password);
+        Task<UserProfile> Auntenticate(string email, string password);
     }
 }

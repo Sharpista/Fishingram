@@ -41,37 +41,12 @@ namespace Fishingram.DataAccess.Migrations
                     b.ToTable("Follows");
                 });
 
-            modelBuilder.Entity("Fishingram.Domain.Entities.Login", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("[Email] IS NOT NULL");
-
-                    b.ToTable("Login");
-                });
-
             modelBuilder.Entity("Fishingram.Domain.Entities.Photo", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<byte[]>("BinaryContent")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ContentType")
                         .HasColumnType("nvarchar(max)")
@@ -80,6 +55,9 @@ namespace Fishingram.DataAccess.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("NomeDoArquivo");
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("PhotoAlbumId")
                         .HasColumnType("bigint");
@@ -123,6 +101,10 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Descricao");
+
                     b.Property<long?>("PhotoId")
                         .HasColumnType("bigint");
 
@@ -132,6 +114,10 @@ namespace Fishingram.DataAccess.Migrations
                     b.Property<DateTime>("PublishDateTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("DataDePublicacao");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Titulo");
 
                     b.HasKey("Id");
 
@@ -153,6 +139,10 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataDeNascimento");
 
+                    b.Property<string>("CPF")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CPF");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Cidade");
@@ -161,8 +151,13 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Complemento");
 
-                    b.Property<long?>("LoginId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Email");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)")
@@ -170,6 +165,11 @@ namespace Fishingram.DataAccess.Migrations
 
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Senha");
 
                     b.Property<long?>("ProfilePictureId")
                         .HasColumnType("bigint");
@@ -187,8 +187,6 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnName("CEP");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LoginId");
 
                     b.HasIndex("ProfilePictureId");
 
@@ -243,15 +241,9 @@ namespace Fishingram.DataAccess.Migrations
 
             modelBuilder.Entity("Fishingram.Domain.Entities.UserProfile", b =>
                 {
-                    b.HasOne("Fishingram.Domain.Entities.Login", "Login")
-                        .WithMany()
-                        .HasForeignKey("LoginId");
-
                     b.HasOne("Fishingram.Domain.Entities.Photo", "ProfilePicture")
                         .WithMany()
                         .HasForeignKey("ProfilePictureId");
-
-                    b.Navigation("Login");
 
                     b.Navigation("ProfilePicture");
                 });

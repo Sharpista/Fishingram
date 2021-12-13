@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Fishingram.Service\Fishingram.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\images\" />
+  </ItemGroup>
+
 </Project>

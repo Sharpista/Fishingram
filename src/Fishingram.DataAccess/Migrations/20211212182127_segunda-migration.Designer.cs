@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fishingram.DataAccess.Migrations
 {
     [DbContext(typeof(FishingramContext))]
-    [Migration("20211206002415_terceira migration")]
-    partial class terceiramigration
+    [Migration("20211212182127_segunda-migration")]
+    partial class segundamigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,9 +50,6 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("BinaryContent")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("ContentType")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("TipoDoConteudo");
@@ -60,6 +57,9 @@ namespace Fishingram.DataAccess.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("NomeDoArquivo");
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("PhotoAlbumId")
                         .HasColumnType("bigint");
@@ -133,6 +133,10 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataDeNascimento");
 
+                    b.Property<string>("CPF")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("CPF");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Cidade");
@@ -141,10 +145,12 @@ namespace Fishingram.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Complemento");
 
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("Email");
 
                     b.Property<string>("Name")
