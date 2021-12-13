@@ -19,7 +19,7 @@ namespace Fishingram.DataAccess.Repositories
         {
             var photoAlbums = await DbSet.ToListAsync();
 
-            return photoAlbums.Where(x => x.Profile.Id == id).ToList();
+            return photoAlbums.Where(x => x.ProfileId == id).ToList();
         }
     }
 }

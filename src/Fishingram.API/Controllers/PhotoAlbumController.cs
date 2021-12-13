@@ -12,7 +12,6 @@ namespace Fishingram.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class PhotoAlbumController : ControllerBase
     {
         private readonly IPhotoAlbumRepository _photoAlbumRepository;
@@ -34,12 +33,21 @@ namespace Fishingram.API.Controllers
             return Ok(photoAlbums);
         }
         [HttpGet]
+        [Route("allPostsFromUser/{id}")]
+        public async Task<ActionResult<IEnumerable<PhotoAlbumDTO>>> GetAllPhotoAlbumsFromUser(long id)
+        {
+            var photoAlbums = _mapper.Map<IEnumerable<PhotoAlbumDTO>>(await _photoAlbumService.GetPhotoAlbumsFromUser(id));
+
+            return Ok(photoAlbums);
+        }
+        [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<PhotoAlbumDTO>> GetPhotoAlbumById(long id)
         {
             var photoAlbum = _mapper.Map<PhotoAlbumDTO>(await _photoAlbumService.GetById(id));
             return Ok(photoAlbum);
         }
+
         [HttpPost]
         public async Task<ActionResult<PhotoAlbumDTO>> AddPhotoAlbum(PhotoAlbumDTO dto)
         {

@@ -37,6 +37,14 @@ namespace Fishingram.API.Controllers
             return Ok(posts);
         }
         [HttpGet]
+        [Route("allPostFromUser/{id}")]
+        public async Task<ActionResult<IEnumerable<PostDTO>>> GetAllPostsFromUserById(long id)
+        {
+            var posts = _mapper.Map<IEnumerable<PostDTO>>(await _postService.GetAllPostFromUser(id));
+
+            return Ok(posts);
+        }
+        [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<PostDTO>> GetPostById(long id)
         {

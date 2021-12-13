@@ -18,7 +18,7 @@ namespace Fishingram.DataAccess.Repositories
         {
             var posts = await DbSet.ToListAsync();
 
-            return posts.Where(x => x.Profile.Id == id).ToList();
+            return posts.Where(x => x.ProfileId == id).ToList();
         }
     }
 }

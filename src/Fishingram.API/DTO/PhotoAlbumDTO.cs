@@ -11,7 +11,7 @@ namespace Fishingram.API.DTO
         [Key]
         public long Id { get; set; }
         public virtual string Description { get;  set; }
-        public virtual DateTime CreationDate { get;  set; }
+        public virtual long  ProfileId { get; set; }
         public virtual List<PhotoDTO> Photos { get;  set; }
     }
 }
